@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #c9e4ca, #f6f7b9e0);
+            flex-direction: column;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px 5px 0 0;
+            background-color: #f5f5f5;
+        }
+
+        .tab.active {
+            background-color: #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .content {
+            padding: 20px 0;
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .password-mismatch {
+            color: red;
+            margin-top: 5px;
+        }
+
+        input[type="password"].mismatch {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decorative-image">
+            <img src="resort1.jpg" alt="Decorative Image" style="width: 100%; max-height: 200px;">
+        </div>
+        <div class="tabs">
+            <div class="tab" onclick="showLogin()">Login</div>
+            <div class="tab" onclick="showSignup()">Sign Up</div>
+        </div>
+        <div id="loginForm" class="content active">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button onclick="login()">Login</button>
+            <button onclick="navigateToHome()">Go to Home</button>
+            <div id="loginPasswordMismatch" class="password-mismatch"></div>
+        </div>
+        <div id="signupForm" class="content">
+            <h2>Sign Up</h2>
+            <input type="text" id="signupFullName" placeholder="Full Name" required>
+            <input type="text" id="signupUsername" placeholder="Username" required>
+            <input type="password" id="signupPassword" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <button onclick="signup()">Sign Up</button>
+            <div id="signupPasswordMismatch" class="password-mismatch"></div>
+        </div>
+    </div>
+
+    <script>
+        function showLogin() {
+            document.getElementById('loginForm').classList.add('active');
+            document.getElementById('signupForm').classList.remove('active');
+        }
+
+        function showSignup() {
+            document.getElementById('loginForm').classList.remove('active');
+            document.getElementById('signupForm').classList.add('active');
+        }        function clearInputs() {            // Clear the input fields            document.getElementById('signupFullName').value = '';            document.getElementById('signupUsername').value = '';            document.getElementById('signupPassword').value = '';            document.getElementById('confirmPassword').value = '';        }
+
+       function login() {           var loginUsername = document.getElementById('loginUsername').value;            var loginPassword = document.getElementById('loginPassword').value;            var signupPassword = document.getElementById('signupPassword').value;            if (loginPassword === signupPassword) {                alert('Login successful');                // You can add the code to navigate to the home page here.            } else {                document.getElementById('loginPasswordMismatch').textContent = 'Passwords do not match.';                document.getElementById('loginPassword').classList.add('mismatch');            }			}
+        function signup() {    var signupFullName = document.getElementById('signupFullName').value;    var signupUsername = document.getElementById('signupUsername').value;    var signupPassword = document.getElementById('signupPassword').value;    var confirmPassword = document.getElementById('confirmPassword').value;    if (signupFullName.trim() === '' || signupUsername.trim() === '' || signupPassword.trim() === '' || confirmPassword.trim() === '') {        alert('Please fill out all fields.');    } else if (signupPassword === confirmPassword) {        alert('Sign Up successful');		clearInputs();        // You can add the code to navigate to the home page here.    } else {        document.getElementById('signupPasswordMismatch').textContent = 'Passwords do not match.';        document.getElementById('confirmPassword').classList.add('mismatch');    }}
+
+        function navigateToHome() {
+            // Add your navigation logic to the home page here
+            window.location.href = 'uiux_main.html';			clearInputs();
+        }
+    </script>
+</body>
+</html>
+
